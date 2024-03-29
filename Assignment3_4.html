@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Car Race</title>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<h2>Cars in the Race</h2>
+
+<table>
+  <tr>
+    <th>Brand</th>
+    <th>Model</th>
+    <th>Year</th>
+    <th>Color</th>
+    <th>Price</th>
+    <th>Gas Remaining</th>
+    <th>Turn 1</th>
+    <th>Turn 2</th>
+    <th>Turn 3</th>
+    <th>Turn 4</th>
+    <th>Turn 5</th>
+    <th>Turn 6</th>
+    <th>Turn 7</th>
+  </tr>
+  <tr id="car1"></tr>
+  <tr id="car2"></tr>
+  <tr id="car3"></tr>
+  <tr id="car4"></tr>
+  <tr id="car5"></tr>
+  <tr id="car6"></tr>
+</table>
+
+<script>
+  // Define Car class
+  class Car {
+    constructor(brand, model, year, color, price, gas) {
+      this.brand = brand;
+      this.model = model;
+      this.year = year;
+      this.color = color;
+      this.price = price;
+      this.gas = gas;
+    }
+
+    // Method to honk and display car info
+    honk() {
+      console.log("Tuut tuut");
+      console.log(`Brand: ${this.brand}, Model: ${this.model}, Year: ${this.year}, Color: ${this.color}, Price: ${this.price}, Gas: ${this.gas}`);
+      return `Gas Remaining: ${this.gas}`;
+    }
+
+    // Method to decrease gas after each turn
+    decreaseGas(currentYear) {
+      let yearsDifference = currentYear - this.year;
+      let gasLoss = 5 + yearsDifference;
+      this.gas -= gasLoss;
+      return `Gas Remaining: ${this.gas}`;
+    }
+  }
+
+  // Create car objects
+  const car1 = new Car("Honda", "CR-V", 2023, "Red", 50000, 45);
+  const car2 = new Car("Ford", "F-150", 2020, "Black", 25000, 30);
+  const car3 = new Car("BMW", "X5", 2022, "Green", 60000, 65);
+  const car4 = new Car("Mazda", "CX-5", 2019, "White", 15000, 60);
+  const car5 = new Car("Audi", "Q7", 2018, "Silver", 52000, 47);
+  const car6 = new Car("Kia", "Forte", 2020, "Blue", 21000, 56);
+
+  // Display car info before the race
+  document.getElementById("car1").innerHTML = `<td>${car1.brand}</td><td>${car1.model}</td><td>${car1.year}</td><td>${car1.color}</td><td>${car1.price}</td><td>${car1.honk()}</td>`;
+  document.getElementById("car2").innerHTML = `<td>${car2.brand}</td><td>${car2.model}</td><td>${car2.year}</td><td>${car2.color}</td><td>${car2.price}</td><td>${car2.honk()}</td>`;
+  document.getElementById("car3").innerHTML = `<td>${car3.brand}</td><td>${car3.model}</td><td>${car3.year}</td><td>${car3.color}</td><td>${car3.price}</td><td>${car3.honk()}</td>`;
+  document.getElementById("car4").innerHTML = `<td>${car4.brand}</td><td>${car4.model}</td><td>${car4.year}</td><td>${car4.color}</td><td>${car4.price}</td><td>${car4.honk()}</td>`;
+  document.getElementById("car5").innerHTML = `<td>${car5.brand}</td><td>${car5.model}</td><td>${car5.year}</td><td>${car5.color}</td><td>${car5.price}</td><td>${car5.honk()}</td>`;
+  document.getElementById("car6").innerHTML = `<td>${car6.brand}</td><td>${car6.model}</td><td>${car6.year}</td><td>${car6.color}</td><td>${car6.price}</td><td>${car6.honk()}</td>`;
+
+  // Simulate race
+  const raceTurns = 7;
+  const currentYear = 2024; // Current year
+
+  function simulateRace() {
+    for (let i = 1; i <= raceTurns; i++) {
+      car1.decreaseGas(currentYear);
+      car2.decreaseGas(currentYear);
+      car3.decreaseGas(currentYear);
+      car4.decreaseGas(currentYear);
+      car5.decreaseGas(currentYear);
+      car6.decreaseGas(currentYear);
+
+      // Display gas remaining after each turn
+      document.getElementById("car1").innerHTML += `<td>${car1.gas}</td>`;
+      document.getElementById("car2").innerHTML += `<td>${car2.gas}</td>`;
+      document.getElementById("car3").innerHTML += `<td>${car3.gas}</td>`;
+      document.getElementById("car4").innerHTML += `<td>${car4.gas}</td>`;
+      document.getElementById("car5").innerHTML += `<td>${car5.gas}</td>`;
+      document.getElementById("car6").innerHTML += `<td>${car6.gas}</td>`;
+    }
+  }
+
+  simulateRace();
+</script>
+
+</body>
+</html>
